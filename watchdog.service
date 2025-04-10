@@ -1,0 +1,14 @@
+[Unit]
+Description=Watchdog Network Monitor
+After=network.target
+
+[Service]
+User=alien
+ExecStart=/usr/bin/python3 /home/alien/watchdog.py
+Restart=on-failure
+RestartSec=10
+StandardOutput=append:/home/alien/watchdog.out
+StandardError=append:/home/alien/watchdog.err
+
+[Install]
+WantedBy=multi-user.target

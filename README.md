@@ -21,3 +21,64 @@ A simple Python-based watchdog that monitors network connectivity to a target IP
 ```bash
 git clone https://github.com/capt-alien/watchdog-monitor.git
 cd watchdog-monitor
+```
+
+### 2. Run the setup script
+
+```bash
+chmod +x setup.sh
+./setup.sh
+```
+
+This will:
+
+- Install the systemd service
+- Create required log files
+- Prompt you to set the `EMAIL_PASSWORD` in `/etc/watchdog.env`
+- Enable and start the service
+
+### 3. Edit your `.env` file
+
+After install, update this file securely:
+
+```bash
+sudo nano /etc/watchdog.env
+```
+
+Set:
+
+```ini
+EMAIL_PASSWORD=your_app_password_here
+```
+
+Use an [App Password](https://support.google.com/accounts/answer/185833) if you're using Gmail.
+
+---
+
+## 🔍 Monitoring the Service
+
+Check status:
+
+```bash
+sudo systemctl status watchdog.service
+```
+
+View logs:
+
+```bash
+tail -f ~/watchdog.out
+tail -f ~/watchdog.err
+```
+
+---
+
+## 🔐 Security Tips
+
+- Do **not** commit `/etc/watchdog.env` or any secrets to Git.
+- Use `.gitignore` to exclude logs and env files.
+
+---
+
+## 📜 License
+
+MIT
